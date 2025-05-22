@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokeDex Scan</title>
+    <title>Scan Card</title>
     <style>
+        /* General reset */
         * {
             margin: 0;
             padding: 0;
@@ -12,29 +13,30 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eff3ff;
+            font-family: 'Arial', sans-serif;
+            background-color: #e6f7ff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-        .container {
-            max-width: 400px;
-            padding: 20px;
+        .scan-container {
+            width: 350px;
+            padding: 25px;
             border-radius: 8px;
             background-color: white;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         h2 {
             text-align: center;
-            font-size: 32px;
+            font-size: 30px;
             margin-bottom: 20px;
+            color: #333;
         }
 
-        .video-container {
+        .video-box {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,73 +45,73 @@
 
         button {
             width: 100%;
-            padding: 12px;
-            border: none;
-            background-color: #4CAF50;
+            padding: 14px;
+            background-color: #28a745;
             color: white;
             font-size: 16px;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #218838;
         }
 
-        .link {
+        .login-link {
             text-align: center;
             margin-top: 15px;
         }
 
-        .link a {
-            color: #4CAF50;
+        .login-link a {
+            color: #28a745;
             text-decoration: none;
         }
 
-        .link a:hover {
+        .login-link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="scanPage">
+    <div class="scan-container">
         <h2>Scan Your Pokémon Card</h2>
-        <div class="video-container">
-            <video id="video" width="300" height="300" autoplay></video>
-            <canvas id="canvas" style="display:none;"></canvas>
+        <div class="video-box">
+            <video id="videoStream" width="300" height="300" autoplay></video>
+            <canvas id="captureCanvas" style="display:none;"></canvas>
         </div>
-        <button onclick="startScan()">Start Scanning</button>
-        <p id="scanResult" style="text-align:center;"></p>
-        <div class="link">
-            <a href="login.html">Go to Login</a>
+        <button onclick="initiateScan()">Start Scanning</button>
+        <p id="scanOutput" style="text-align:center;"></p>
+        <div class="login-link">
+            <a href="login.html">Back to Login</a>
         </div>
     </div>
 
     <script>
-        // Start the card scanning process
-        function startScan() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const scanResult = document.getElementById('scanResult');
+        // Initialize the scan process
+        function initiateScan() {
+            const videoElement = document.getElementById('videoStream');
+            const canvasElement = document.getElementById('captureCanvas');
+            const scanOutput = document.getElementById('scanOutput');
 
-            // Set up the video stream for the camera
+            // Request access to the user's webcam
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
-                    video.srcObject = stream;
+                    videoElement.srcObject = stream;
                 })
                 .catch(function(error) {
-                    console.error('Error accessing webcam: ', error);
-                    alert('Could not access webcam');
+                    console.error('Webcam access denied: ', error);
+                    alert('Could not access webcam.');
                 });
 
-            // Capture a frame from the video and display the result (simulated)
-            video.addEventListener('play', function() {
-                let context = canvas.getContext('2d');
+            // Capture frame from webcam and simulate scan result
+            videoElement.addEventListener('play', function() {
+                const context = canvasElement.getContext('2d');
                 setInterval(function() {
-                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                    // Mock card scan (replace with actual card scanning logic or QR code decoding)
-                    scanResult.textContent = "Scanned Pokémon: "; // This will display the scanned result
+                    context.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+                    let imageData = context.getImageData(0, 0, canvasElement.width, canvasElement.height);
+                    // Simulate a scanned Pokémon card result
+                    scanOutput.textContent = "Scanned Pokémon: "; // Placeholder text
                 }, 1000);
             });
         }
