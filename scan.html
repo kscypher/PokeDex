@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeDex Scan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eff3ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="scanPage">
+        <h2>Scan Your Pokémon Card</h2>
+        <div class="video-container">
+            <video id="video" width="300" height="300" autoplay></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+        </div>
+        <button onclick="startScan()">Start Scanning</button>
+        <p id="scanResult" style="text-align:center;"></p>
+        <div class="link">
+            <a href="login.html">Go to Login</a>
+        </div>
+    </div>
+
+    <script>
+        // Start the card scanning process
+        function startScan() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const scanResult = document.getElementById('scanResult');
+
+            // Set up the video stream for the camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing webcam: ', error);
+                    alert('Could not access webcam');
+                });
+
+            // Capture a frame from the video and display the result (simulated)
+            video.addEventListener('play', function() {
+                let context = canvas.getContext('2d');
