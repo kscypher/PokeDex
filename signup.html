@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokeDex Sign Up</title>
+    <title>PokeDex - Register</title>
     <style>
+        /* Reset default styling */
         * {
             margin: 0;
             padding: 0;
@@ -12,91 +13,93 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #eff3ff;
+            font-family: 'Arial', sans-serif;
+            background-color: #e6f7ff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
-        .container {
-            max-width: 400px;
+        .form-container {
+            width: 350px;
             padding: 20px;
-            border-radius: 8px;
             background-color: white;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
         }
 
         h2 {
             text-align: center;
-            font-size: 32px;
+            font-size: 30px;
             margin-bottom: 20px;
+            color: #333;
         }
 
-        .input-field {
+        .input-box {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 18px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            border: none;
-            background-color: #4CAF50;
+            padding: 14px;
+            background-color: #28a745;
             color: white;
             font-size: 16px;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #218838;
         }
 
-        .link {
+        .signin-link {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
-        .link a {
-            color: #4CAF50;
+        .signin-link a {
+            color: #28a745;
             text-decoration: none;
         }
 
-        .link a:hover {
+        .signin-link a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="signupPage">
-        <h2>Sign Up</h2>
-        <form id="signupForm">
-            <input type="email" id="signupEmail" class="input-field" placeholder="Email" required>
-            <input type="password" id="signupPassword" class="input-field" placeholder="Password" required>
+    <div class="form-container">
+        <h2>Create an Account</h2>
+        <form id="registerForm">
+            <input type="email" id="registerEmail" class="input-box" placeholder="Enter your email" required>
+            <input type="password" id="registerPassword" class="input-box" placeholder="Choose a password" required>
             <button type="submit">Sign Up</button>
         </form>
-        <div class="link">
-            Already have an account? <a href="login.html">Login</a>
+        <div class="signin-link">
+            Already have an account? <a href="login.html">Log In</a>
         </div>
     </div>
 
     <script>
-        // Handle signup form submission
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let email = document.getElementById('signupEmail').value;
-            let password = document.getElementById('signupPassword').value;
-            // Mock signup (replace with real authentication)
+        // Handle the form submission for sign up
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let email = document.getElementById('registerEmail').value;
+            let password = document.getElementById('registerPassword').value;
+            
+            // Simulate registration (this should be replaced with actual registration logic)
             if (email && password) {
-                alert('Sign Up Successful');
+                alert('Registration successful');
                 window.location.href = "login.html";  // Redirect to login page
             } else {
-                alert('Please fill in both fields');
+                alert('Please fill out both fields');
             }
         });
     </script>
