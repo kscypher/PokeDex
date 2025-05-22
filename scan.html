@@ -105,3 +105,14 @@
             // Capture a frame from the video and display the result (simulated)
             video.addEventListener('play', function() {
                 let context = canvas.getContext('2d');
+                setInterval(function() {
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                    // Mock card scan (replace with actual card scanning logic or QR code decoding)
+                    scanResult.textContent = "Scanned Pokémon: "; // This will display the scanned result
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
