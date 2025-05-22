@@ -206,7 +206,7 @@ For questions or collaboration inquiries, feel free to reach out:
 
 ### Happy Collecting and Trading! 🃏
 
-*** WARNING ***
+### WARNING ###
 
 It's still in development phase.
 ---
